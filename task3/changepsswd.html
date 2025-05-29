@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reset Password</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('blue.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      width: 350px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    h2 {
+      color: #2b4e72;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .buttons {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      width: 48%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .continue {
+      background-color: #4a90e2;
+      color: white;
+    }
+    .cancel {
+      background-color: #ddd;
+      color: black;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Reset Password</h2>
+    <form action="changepassword.php" method="POST">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="new_password" placeholder="New Password" required />
+      <input type="password" name="confirm_password" placeholder="Confirm New Password" required />
+      <div class="buttons">
+        <button type="submit" class="continue">Continue</button>
+        <button type="button" class="cancel" onclick="window.location.href='login.html'">Cancel</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff - Upload Files</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Papyrus&display=swap');
+
+        body {
+            display: flex;
+            font-family: Comic Sans MS;
+        }
+        .sidebar {
+            width: 250px;
+            background: #031C4F;
+            color: white;
+            padding: 10px;
+            height: 95vh;
+            overflow-y: auto;
+        }
+        .semester, .teacher {
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .subjects, .teachers {
+            display: none;
+            padding-left: 15px;
+        }
+        .subject {
+            margin: 5px 0;
+            padding: 8px;
+            cursor: pointer;
+            color: #73DCFF;
+            font-family: 'calibri', fantasy;
+        }
+        
+        .teacher {
+            background: #031C4F;
+            color: white;
+            padding: 10px;
+            width:20%;
+            border-radius: 5px;
+            text-align: center;
+            font-family: 'Papyrus', fantasy;
+        }
+        .subject:hover, .teacher:hover {
+            background-color: white;
+            color:black;
+            transition: 0.3s ease;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            color: black;
+            background-image: url('blue.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2); 
+
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <script>
+            const semesters = {
+                1: ['Technical Communication', 'Calculus', 'Computational Problem Solving', 'Introduction to Electrical and Electronics Engineering'],
+                2: ['Discrete Mathematics', 'Linear Algebra', 'Object Oriented Programming', 'Modern Physics', 'User Interface Design'],
+                3: ['Optimization Techniques', 'Digital Electronics', 'Database Management Systems', 'Data Structures and Algorithms'],
+                4: ['Probability and Random Processes', 'Design and Analysis of Algorithms', 'Operating Systems'],
+                5: ['Machine Learning', 'Computer Networks', 'Theory of Computation'],
+                6: ['Software Engineering', 'Distributed Systems', 'Foundations of Cyber Security'],
+                7: ['Professional Electives', 'Fundamentals of Artificial Intelligence'],
+                8: ['Project - Phase III']
+            };
+            const teachersBySubject = {
+                'Technical Communication': ['Mr Hariharan M', 'Dr Vinata Sai'],
+                'User Interface Design': ['Ms M Rithani', 'Ms Nivetha'],
+                'Object Oriented Programming': ['Dr Suthir Sriram', 'Ms Geetha'],
+                'Linear Algebra': ['Dr Muthuselvan', 'Ms Sweetha'],
+                'Discrete Mathematics': ['Dr Chinika Dangi', 'Ajith'],
+                'Modern Physics': ['Dr Khushbhu Dash'],
+            };
+            for (let sem in semesters) {
+                document.write(`<div class="semester" onclick="toggleSemester(${sem})">&#128221; Semester ${sem}</div>`);
+                document.write(`<div class="subjects" id="sem-${sem}">`);
+                semesters[sem].forEach(subject => {
+                    document.write(`<div class="subject" onclick="showTeachers('${subject}')">${subject}</div>`);
+                });
+                document.write('</div>');
+            }
+        </script>
+    </div>
+    <div class="main-content" id="file-area">
+        <h2>Select a subject to upload files</h2>
+    </div>
+    <script>
+        function toggleSemester(sem) {
+            let semesterDiv = document.getElementById(`sem-${sem}`);
+            let allSemesters = document.querySelectorAll('.subjects');
+            allSemesters.forEach(semDiv => {
+                if (semDiv !== semesterDiv) semDiv.style.display = 'none';
+            });
+            semesterDiv.style.display = semesterDiv.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function showTeachers(subject) {
+            let teachers = teachersBySubject[subject] || ['Teacher 1', 'Teacher 2'];
+            let teachersHtml = teachers.map(teacher => 
+                `<div class="teacher" onclick="showUploadForm('${subject}', '${teacher}')">${teacher}</div>`
+            ).join('');
+            document.getElementById("file-area").innerHTML = `
+                <h2>Select a Teacher</h2>
+                <h3 style="font-family: 'Papyrus', fantasy;">${subject}</h3>
+                <div>${teachersHtml}</div>
+            `;
+        }
+
+        function showUploadForm(subject, teacher) {
+            document.getElementById("file-area").innerHTML = `
+                <h2 style="font-family: 'Papyrus', fantasy;">${subject} - Upload Files</h2>
+                <h3 style="font-family: 'Papyrus', fantasy;">Teacher: ${teacher}</h3>
+                <form action="upload.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="subject" value="${subject}">
+                    <input type="hidden" name="teacher" value="${teacher}">
+                    <input type="file" name="file" required><br><br>
+                    <input type="password" name="passkey" placeholder="Enter Passkey" required><br><br>
+                    <button type="submit" name="upload">Upload File</button>
+                </form>
+            `;
+        }
+    </script>
+</body>
+</html>

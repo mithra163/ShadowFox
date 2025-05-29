@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XChangeBox - Unlock Your Academic Potential</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #ffdd57;
+        }
+
+        .nav-links li a.faq-btn {
+            background-color: #ffdd57;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links li a.faq-btn:hover {
+            background-color: #ffcc00;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 150px 0 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            color: #fff;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffdd57;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background-color: #ffdd57;
+            color: #333;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-right: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button.secondary {
+            background-color: transparent;
+            color: #ffdd57;
+            border: 2px solid #ffdd57;
+        }
+
+        .cta-button:hover {
+            background-color: #ffcc00;
+        }
+
+        .cta-button.secondary:hover {
+            background-color: #ffdd57;
+            color: #333;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .study-materials, .academic-potential {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .study-materials h2, .academic-potential h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .study-materials p, .academic-potential p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .card, .team-member {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .card:hover, .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h3, .team-member h3 {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p, .team-member p {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">XChangeBox</div>
+            <ul class="nav-links">
+                <li><a href="staffs.html">Home</a></li>
+                <li><a href="staff.html">E-Materials</a></li>
+                <li><a href="sh.html">Updates</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#faq" class="faq-btn">FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Unlock Your Academic Potential</h1>
+                <p>Elevate Your Learning Journey with Our Diverse Collection of Study Materials.</p>
+                <a href="staff.html"><button class="cta-button">Get Started</button></a>
+                <a href="https://www.amrita.edu"><button class="cta-button secondary">Explore Now</button></a>
+            </div>
+            <div class="hero-image">
+                <img src="students.jpeg" alt="Students studying on laptop">
+            </div>
+        </section>
+
+        <section class="study-materials">
+            <h2>Study Materials</h2>
+            <p>Access a wide range of resources tailored to your academic needs.</p>
+            <div class="card">
+                <h3>E-Books</h3>
+                <p>Explore our extensive library of e-books for all subjects.</p>
+            </div>
+            <div class="card">
+                <h3>Video Lectures</h3>
+                <p>Learn from expert educators with our curated video content.</p>
+            </div>
+        </section>
+
+        <section class="academic-potential">
+            <h2>Boost Your Academic Potential</h2>
+            <p>Join thousands of students who have transformed their learning experience.</p>
+            <div class="team-member">
+                <h3>Expert Tutors</h3>
+                <p>Get guidance from experienced tutors in various fields.</p>
+            </div>
+            <div class="team-member">
+                <h3>Interactive Quizzes</h3>
+                <p>Test your knowledge with our interactive quizzes and assessments.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Amrita Students. All rights reserved.</p>
+    </footer>
+</body>
+</html>

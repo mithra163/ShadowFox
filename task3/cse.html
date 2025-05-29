@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE - Semester and Subjects</title>
+    <style>
+        body {
+            display: flex;
+            font-family: Comic Sans MS;
+            justify-content: space-between;
+        }
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, #0B1E39, #041833);
+            color: white;
+            padding: 10px;
+            height: 94vh;
+            overflow-y: auto;
+        }
+        .semester {
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .subjects {
+            display: none;
+            padding-left: 15px;
+        }
+        .subject {
+            color:#73DCFF;
+            margin: 5px 0;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .subject:hover, .teacher:hover {
+            background-color: white;
+            color:black;
+            transition: 0.3s ease;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            color: black;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        .buttons button {
+            margin-right: 10px;
+            padding: 5px 10px;
+            border: none;
+            background: black;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .header {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+        }
+        .header button {
+            padding: 5px 10px;
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main-content" id="file-area">
+        <h1>Access your study materials</h1>
+    </div>
+    <div class="header">
+        <button onclick="window.location.href='changepsswd.html'">Change Password</button>
+    </div>
+    <script>
+        const subjectsBySemester = {
+            1: ['Technical Communication', 'Calculus', 'Computational Problem Solving', 'Introduction to Electrical and Electronics Engineering'],
+            2: ['Technical Communication', 'Discrete Mathematics', 'Linear Algebra', 'Object Oriented Programming','Manufacturing Practice','User Interface Design','Glimpses of Glorious India','Modern Physics'],
+            3: ['Digital Electronics', 'Database Management Systems', 'Data Structures and Algorithms'],
+            4: ['Probability and Random Processes', 'Design and Analysis of Algorithms', 'Operating Systems'],
+            5: ['Machine Learning', 'Computer Networks', 'Theory of Computation'],
+            6: ['Software Engineering', 'Distributed Systems', 'Foundations of Cyber Security'],
+            7: ['Professional Electives', 'Fundamentals of Artificial Intelligence'],
+            8: ['Project - Phase III']
+        };
+
+        const teachersBySubject = {
+            'Technical Communication': ['Mr Hariharan M', 'Dr Vinata Sai'],
+            'User Interface Design': ['Ms M Rithani', 'Ms Nivetha'],
+            'Object Oriented Programming': ['Dr Suthir Sriram', 'Ms Geetha'],
+            'Linear Algebra': ['Dr Muthuselvan', 'Ms Sweetha'],
+            'Discrete Mathematics': ['Dr Chinika Dangi', 'Ajith'],
+            'Manufacturing Practice': ['Dr Krishnadass','Dr Sunilkumar'],
+            'Modern Physics': ['Dr Khushbhu Dash'],
+            'Glimpses of Glorious India': ['Dr Rajeswara Rao', 'Ms Archana Devi']
+        };
+
+        function toggleSemester(sem) {
+            let semesterDiv = document.getElementById(`sem-${sem}`);
+            let allSemesters = document.querySelectorAll('.subjects');
+
+            allSemesters.forEach(semDiv => {
+                if (semDiv !== semesterDiv) semDiv.style.display = 'none';
+            });
+
+            semesterDiv.style.display = semesterDiv.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function showTeachers(subject) {
+            let teachers = teachersBySubject[subject] || ['Teacher 1', 'Teacher 2'];
+            let teachersHtml = teachers.map(teacher => 
+                `<button onclick="showFiles('${subject}', '${teacher}')">${teacher}</button>`
+            ).join('');
+
+            document.getElementById("file-area").innerHTML = `
+                <h2>Select a Teacher</h2>
+                <h3>${subject}</h3>
+                <div class="buttons">${teachersHtml}</div>
+            `;
+        }
+         function showFiles(subject, teacher) {
+    document.getElementById("file-area").innerHTML = `
+        <h2>Download Materials</h2>
+        <h3>${subject} - ${teacher}</h3>
+        <form action="download.php" method="post">
+            <input type="hidden" name="subject" value="${subject}">
+            <input type="hidden" name="teacher" value="${teacher}">
+            <input type="password" name="passkey" placeholder="🔒Enter Passkey" required><br><br>
+            <button type="submit">Download Files</button>
+        </form>
+    `;
+}
+        let sidebar = document.getElementById("sidebar");
+        for (let sem = 1; sem <= 8; sem++) {
+            let semesterDiv = document.createElement("div");
+            semesterDiv.className = "semester";
+            semesterDiv.innerHTML = `&#128221; Semester ${sem}`;
+            semesterDiv.onclick = function () { toggleSemester(sem); };
+            sidebar.appendChild(semesterDiv);
+
+            let subjectsDiv = document.createElement("div");
+            subjectsDiv.className = "subjects";
+            subjectsDiv.id = `sem-${sem}`;
+            subjectsBySemester[sem].forEach(subject => {
+                let subjectDiv = document.createElement("div");
+                subjectDiv.className = "subject";
+                subjectDiv.textContent = subject;
+                subjectDiv.onclick = function () { showTeachers(subject); };
+                subjectsDiv.appendChild(subjectDiv);
+            });
+            sidebar.appendChild(subjectsDiv);
+        }
+    </script>
+</body>
+</html>

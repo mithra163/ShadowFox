@@ -1,0 +1,121 @@
+<html>
+<head>
+  <title>View Updates</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-image: url('blue.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    #popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ffa500;
+      color: white;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 10px;
+      display: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: bounce 1s infinite alternate;
+    }
+    @keyframes bounce {
+      to {
+        transform: translateY(-5px);
+      }
+    }
+    h2 {
+      text-align: center;
+      color: white;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+    #updates {
+      max-width: 800px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    .update-card {
+      background: #f0f8ff;
+      border-left: 5px solid #007bff;
+      margin-bottom: 15px;
+      padding: 15px 20px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .update-card:hover {
+      transform: scale(1.02);
+      background: #e6f2ff;
+    }
+
+    .update-card strong {
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .update-card small {
+      display: block;
+      margin-top: 5px;
+      color: #666;
+    }
+
+    .update-card p {
+      margin-top: 5px;
+      font-size: 1rem;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div id="popup">New Updates!</div>
+
+  <h2>Latest Student Updates</h2>
+
+  <div id="updates"></div>
+
+  <script>
+    const lastSeen = localStorage.getItem("lastSeen") || 0;
+
+    fetch("gu.php")
+      .then(res => res.json())
+      .then(data => {
+        const updateDiv = document.getElementById("updates");
+        updateDiv.innerHTML = "";
+        let latestTime = 0;
+        let hasNew = false;
+
+        data.forEach(update => {
+          const time = new Date(update.timestamp).getTime();
+          if (time > lastSeen) hasNew = true;
+          if (time > latestTime) latestTime = time;
+
+          updateDiv.innerHTML += `
+            <div class="update-card">
+              <strong>${update.teacher}</strong>
+              <p>${update.message}</p>
+              <small> ${update.timestamp}</small>
+            </div>
+          `;
+        });
+        if (hasNew) {
+          document.getElementById("popup").style.display = "block";
+        }
+
+        localStorage.setItem("lastSeen", latestTime);
+      });
+  </script>
+</body>
+</html>
