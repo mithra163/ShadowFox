@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills - H MITHRA</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background-color: #031926;
+      color: #ffffff;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .skills-card {
+      background-color: #021018;
+      padding: 60px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(0, 217, 255, 0.2);
+      width: 80%;
+      max-width: 800px;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .skills-card h1 {
+      font-size: 36px;
+      color: #00d9ff;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #00d9ff;
+      padding-bottom: 10px;
+    }
+
+    .skills-card ul {
+      list-style: none;
+    }
+
+    .skills-card li {
+      font-size: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .skills-card li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #00d9ff;
+      font-size: 18px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .skills-card {
+        padding: 40px 25px;
+        height: auto;
+      }
+
+      .skills-card h1 {
+        font-size: 28px;
+      }
+
+      .skills-card li {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="skills-card">
+    <h1>My Skills</h1>
+    <ul>
+      <li>Python – Proficient</li>
+      <li>Machine Learning – Project Experience</li>
+      <li>C – Basics</li>
+      <li>Java – Basics</li>
+      <li>C++ – Basics</li>
+    </ul>
+  </div>
+</body>
+</html>

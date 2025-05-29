@@ -1,0 +1,97 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #031926;
+      color: #ffffff;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00d9ff;
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background-color: #021018;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+    }
+
+    .project-title {
+      color: #00d9ff;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .project-description {
+      color: #ccc;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .project-link a {
+      color: #00d9ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .project-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      .project-title {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Projects</h1>
+
+  <div class="projects-container">
+    <div class="project-card">
+      <div class="project-title">Machine Learning Prediction Model</div>
+      <div class="project-description">
+        Built a model using Python and scikit-learn to predict outcomes based on real-world datasets.
+      </div>
+      <div class="project-link">
+        <a href="untitled16.html" target="_blank">View Project</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

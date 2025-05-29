@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #031926;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background-color: #021018;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #ccc;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px;
+      min-height: calc(100vh - 80px);
+    }
+
+    .left {
+      max-width: 50%;
+    }
+
+    .left h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .left h1 span {
+      color: #00d9ff;
+    }
+
+    .left h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #00d9ff;
+    }
+
+    .left p {
+      max-width: 500px;
+      margin-bottom: 30px;
+      color: #ccc;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      background-color: #00d9ff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #00b5cc;
+    }
+
+    button.outline {
+      background-color: transparent;
+      color: #00d9ff;
+      border: 2px solid #00d9ff;
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+    }
+
+    .right img {
+      height: 450px;
+      width: 450px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #021018;
+      box-shadow: 0 0 40px rgba(0, 217, 255, 0.3);
+      margin-right: -50px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+      }
+
+      .left, .right {
+        max-width: 100%;
+      }
+
+      .right img {
+        margin: 30px auto 0;
+        height: 300px;
+        width: 300px;
+        margin-right: 0;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">PORTFOLIO</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="left">
+      <h1>Hi, I'm <span>H MITHRA</span></h1>
+      <h2>College Student</h2>
+      <p>i'm pursuing B-Tech computer science and engineering in Amrita Vishwa Vidyapeetham, chennai campus.</p>
+        <button><a href="New_Resume.pdf">Resume</a></button>
+        <button><a href="skills.html">Skills</a></button>
+    </div>
+    <div class="right">
+      <img src="mithu.jpg" alt="My Photo" />
+    </div>
+  </section>
+</body>
+</html>
