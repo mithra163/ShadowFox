@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu - My Bites</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    .cart-popup {
+      display: none;
+      position: fixed;
+      top: 4rem;
+      right: 1rem;
+      width: 300px;
+      background-color: white;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      z-index: 50;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="p-6 bg-pink-600 text-white text-2xl font-bold text-center relative">
+    Welcome to My Bites
+    <button onclick="toggleCartPopup()" class="absolute right-6 top-6 text-white">
+      <i class="ph ph-shopping-cart text-3xl"></i>
+    </button>
+  </div>
+
+  <div class="p-6 text-center">
+    <label class="text-lg font-medium">Select Category:</label>
+    <select id="category" onchange="scrollToSection()" class="ml-4 p-2 rounded border">
+      <option disabled selected>Select</option>
+      <option value="pastries">Pastries</option>
+      <option value="cakes">Cakes</option>
+      <option value="muffins">Muffins</option>
+      <option value="croissants">Croissants</option>
+      <option value="bakery">Bakery Items</option>
+    </select>
+  </div>
+
+  <script>
+    function scrollToSection() {
+      const value = document.getElementById("category").value;
+      document.getElementById(value).scrollIntoView({ behavior: "smooth" });
+    }
+
+    let cart = [];
+    const quantities = {};
+
+    function changeQuantity(id, delta) {
+      if (!quantities[id]) quantities[id] = 1;
+      quantities[id] = Math.max(1, quantities[id] + delta);
+      document.getElementById(`${id}-qty`).textContent = quantities[id];
+    }
+
+    function addToCart(name, price, id) {
+      const qty = quantities[id] || 1;
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.qty += qty;
+      } else {
+        cart.push({ name, price, qty });
+      }
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartBox = document.getElementById("cart-items");
+      cartBox.innerHTML = "";
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price * item.qty;
+        const li = document.createElement("li");
+        li.className = "mb-2 flex justify-between items-center";
+        li.innerHTML = `
+          <span>${item.name} × ${item.qty} - ₹${item.price * item.qty}</span>
+          <button onclick="removeFromCart(${index})" class="text-red-500 font-bold ml-2">&times;</button>
+        `;
+        cartBox.appendChild(li);
+      });
+      document.getElementById("cart-total").textContent = `Total: ₹${total}`;
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function toggleCartPopup() {
+      const popup = document.getElementById("cart-popup");
+      popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
+
+    function generateItemHTML(name, price, image) {
+      const id = name.replace(/\s+/g, "-").toLowerCase();
+      return `
+        <div class="bg-white p-4 rounded shadow">
+          <img src="${image}" class="w-full h-48 object-cover rounded mb-2" />
+          <p class="font-semibold">${name} - ₹${price}</p>
+          <div class="flex items-center mt-2">
+            <button onclick="changeQuantity('${id}', -1)" class="bg-gray-300 px-2 rounded">-</button>
+            <span id="${id}-qty" class="px-3">1</span>
+            <button onclick="changeQuantity('${id}', 1)" class="bg-gray-300 px-2 rounded">+</button>
+          </div>
+          <button onclick="addToCart('${name}', ${price}, '${id}')" class="mt-2 px-4 py-2 bg-pink-600 text-white rounded">Add to Cart</button>
+        </div>
+      `;
+    }
+  </script>
+
+  <!-- Sections -->
+  <div id="pastries" class="p-6">
+    <h2 class="text-2xl font-bold mb-4">Pastries</h2>
+    <div class="grid gap-4 md:grid-cols-3">
+      <script>
+        document.write(generateItemHTML("Chocolate Pastry", 80, "https://img.onmanorama.com/content/dam/mm/en/food/recipe/images/2023/5/9/chocolate-pastry.jpg/photos/16x9/photo.jpg"));
+        document.write(generateItemHTML("Vanilla Pastry", 75, "https://i.ytimg.com/vi/uaBbYlNgQFg/maxresdefault.jpg"));
+        document.write(generateItemHTML("Strawberry Pastry", 85, "https://bakejunction.com/wp-content/uploads/2021/07/ai0a0201_H_E_less-Strawb-Pastry.jpg"));
+      </script>
+    </div>
+  </div>
+
+  <div id="cakes" class="p-6">
+    <h2 class="text-2xl font-bold mb-4">Cakes</h2>
+    <div class="grid gap-4 md:grid-cols-3">
+      <script>
+        document.write(generateItemHTML("Black Forest Cake", 500, "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0_tbrJhFqRBvlE7U2ICxmKMfmAS80QxP_naYKScnbLyK_zrqKmX7dRX5KbrHRUV0zhJE7OcXxrbn-phcibPiCD5rG5_S2dBiJrBfKgB1SxheGEdBFd_VfFOqFR9BPQqnp_ZIeWgtpX8L6/s1600/DSC07710.JPG"));
+        document.write(generateItemHTML("Red Velvet Cake", 550, "https://preppykitchen.com/wp-content/uploads/2022/07/Red-Velvet-Recipe-Card-1a.jpg"));
+        document.write(generateItemHTML("Butterscotch Cake", 450, "https://thomsonline.in/wp-content/uploads/2019/08/BUTTERSCOTCH-CAKE-3.jpg"));
+      </script>
+    </div>
+  </div>
+
+  <div id="muffins" class="p-6">
+    <h2 class="text-2xl font-bold mb-4">Muffins</h2>
+    <div class="grid gap-4 md:grid-cols-3">
+      <script>
+        document.write(generateItemHTML("Blueberry Muffin", 60, "https://www.kingarthurbaking.com/sites/default/files/2022-12/KABC_Quick-Breads_Blueberry-Muffin_08304.jpg"));
+        document.write(generateItemHTML("Chocolate Muffin", 65, "https://static01.nyt.com/images/2024/12/05/multimedia/SS-Chocolate-Banana-Muffins-jfvl/SS-Chocolate-Banana-Muffins-jfvl-videoSixteenByNineJumbo1600.jpg"));
+        document.write(generateItemHTML("Banana Muffin", 55, "https://livetosweet.com/wp-content/uploads/2020/01/butterscotch-banana-muffin-on-plate-square.jpg"));
+      </script>
+    </div>
+  </div>
+
+  <div id="croissants" class="p-6">
+    <h2 class="text-2xl font-bold mb-4">Croissants</h2>
+    <div class="grid gap-4 md:grid-cols-3">
+      <script>
+        document.write(generateItemHTML("Butter Croissant", 50, "https://sugargeekshow.com/wp-content/uploads/2022/11/croissants_featured.jpg"));
+        document.write(generateItemHTML("Cheese Croissant", 65, "https://www.mecooks.com/wp-content/uploads/2024/02/IMGL5951-min-scaled.jpg"));
+        document.write(generateItemHTML("Chocolate Croissant", 70, "https://www.inspiredtaste.net/wp-content/uploads/2016/08/Easy-Chocolate-Croissant-Recipe-1-1200.jpg"));
+      </script>
+    </div>
+  </div>
+
+  <div id="bakery" class="p-6">
+    <h2 class="text-2xl font-bold mb-4">Bakery Items</h2>
+    <div class="grid gap-4 md:grid-cols-3">
+      <script>
+        document.write(generateItemHTML("Cookies", 30, "https://www.nestleprofessional.in/sites/default/files/2022-07/Butter-Cookies.jpg"));
+        document.write(generateItemHTML("Brownies", 90, "https://i2.wp.com/lifemadesimplebakes.com/wp-content/uploads/2020/07/Homemade-Bronwies-square-1200.jpg"));
+        document.write(generateItemHTML("Bread Loaf", 40, "https://breadtopia.com/wp-content/uploads/2023/01/20230104_131203-x-Copy.jpg"));
+      </script>
+    </div>
+  </div>
+
+  <!-- Cart Popup -->
+  <div id="cart-popup" class="cart-popup">
+    <h3 class="font-bold text-lg mb-2">Cart</h3>
+    <ul id="cart-items" class="mb-2 list-disc list-inside"></ul>
+    <p id="cart-total" class="font-semibold mb-4">Total: ₹0</p>
+    <button onclick="window.location.href='buy.html'" class="bg-green-600 text-white px-4 py-2 rounded w-full">
+  Buy Now
+</button>
+
+  </div>
+</body>
+</html>
